@@ -1,0 +1,15 @@
+exportPattern("^[[:alpha:]]+")
+import(Rcpp, GMMAT, Matrix)
+importFrom("stats", "binomial", "dbeta", "glm", "model.matrix","lm","pcauchy","rnorm")
+importFrom("Rcpp", "evalCpp")
+importFrom("GMMAT", "glmmkin")
+importFrom("Matrix", "Matrix", "colMeans")
+importFrom("stats", "quantile")
+importFrom("GENESIS", "makeSparseMatrix")
+importFrom("kinship2", "makekinship")
+
+useDynLib(SCANG, .registration = TRUE)
+
+# functions
+export(fit_null_glm_SCANG, fit_null_glmmkin_SCANG, SCANG)
+
