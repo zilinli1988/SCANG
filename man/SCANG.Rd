@@ -6,7 +6,7 @@
 \usage{
 SCANG(genotype, obj_nullmodel, Lmin, Lmax, annotation_phred = NULL,
   rare_maf_cutoff = 0.05, steplength = 5, alpha = 0.05,
-  filter = 1e-04, f = 0.5)
+  filter = 1e-04, f = 0.5, subseq_num = 2000)
 }
 \arguments{
 \item{genotype}{an n*p genotype matrix (dosage matrix) of the target sequence, where n is the sample
@@ -42,6 +42,8 @@ is possibly smaller than the filtering threshold (default = 1e-4).}
 \item{f}{an overlap fraction, which controls for the overlapping proportion of of detected regions. For example,
 when f=0, the detected regions are non-overlapped with each other,
 and when f=1, we keep every susceptive region as detected regions (default = 0.5).}
+
+\item{subseq_num}{number of variants run in each sub-sequence (default = 2000).}
 }
 \value{
 The function returns a list with the following members:

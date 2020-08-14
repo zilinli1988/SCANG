@@ -33,6 +33,7 @@
 #' @param f an overlap fraction, which controls for the overlapping proportion of of detected regions. For example,
 #' when f=0, the detected regions are non-overlapped with each other,
 #' and when f=1, we keep every susceptive region as detected regions (default = 0.5).
+#' @param subseq_num number of variants run in each sub-sequence (default = 2000).
 #' @return The function returns a list with the following members:
 #' @return \code{SCANG_O_res}:   A matrix that summarized the significant region detected by SCANG-O.
 #' The first column is the -log(p-value) of the detected region.
@@ -64,13 +65,14 @@
 #' (\href{https://www.sciencedirect.com/science/article/pii/S0002929719300023}{pub})
 #' @export
 
-SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_maf_cutoff=0.05,steplength=5,alpha=0.05,filter=1e-4,f=0.5)
+SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_maf_cutoff=0.05,steplength=5,alpha=0.05,filter=1e-4,f=0.5,subseq_num=2000)
 {
 	subseq_num <- 2000
 	seed <- 666
 
 	samplesize <- dim(genotype)[1]
 	folds <- floor(dim(genotype)[2]/subseq_num)
+	folds <- max(1,folds)
 	times <- obj_nullmodel$times
 
 	if(class(genotype)=="dgCMatrix")
