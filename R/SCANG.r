@@ -67,7 +67,7 @@
 
 SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_maf_cutoff=0.05,steplength=5,alpha=0.05,filter=1e-4,f=0.5,subseq_num=2000)
 {
-	subseq_num <- 2000
+
 	seed <- 666
 
 	samplesize <- dim(genotype)[1]
