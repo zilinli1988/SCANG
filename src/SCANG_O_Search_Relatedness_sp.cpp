@@ -22,7 +22,7 @@ double CCT_pval(arma::vec x, arma::vec weights);
 
 
 // [[Rcpp::export]]
-List SCANG_O_Search_Relatedness_sp(arma::sp_mat G, arma::sp_mat Sigma_i, arma::mat Sigma_iX, arma::mat cov, arma::vec residuals, const double threshold, const int Lmax, const int Lmin, int steplength, arma::mat weights_B, arma::mat weights_S, const int begid, const double filter, const double f)
+List SCANG_O_Search_Relatedness_sp(arma::sp_mat G, arma::sp_mat Sigma_i, arma::mat Sigma_iX, arma::mat cov, arma::vec residuals, const double threshold_o, const double threshold_s, const double threshold_b, const int Lmax, const int Lmin, int steplength, arma::mat weights_B, arma::mat weights_S, const int begid, const double filter, const double f)
 {
 	int ij, i, j, k, ii, jj, kk, s, ss, rr;
 
@@ -89,17 +89,35 @@ List SCANG_O_Search_Relatedness_sp(arma::sp_mat G, arma::sp_mat Sigma_i, arma::m
 	// Intermediate parameter for Omnibus test
 	//p_O
 	double sump_o = 1.0;
+	//p_s
+	double sump_os = 1.0;
+	//p_b
+	double sump_ob = 1.0;
 
 	// Weights for ACAT
+	// SCANG_O
 	arma::vec CCT_weights;
 	CCT_weights.ones(2*w_num);
+	// SCANG_S
+	arma::vec CCT_weights_s;
+	CCT_weights_s.ones(w_num);
+	//SCANG_B
+	arma::vec CCT_weights_b;
+	CCT_weights_b.ones(w_num);
 
 	// p-value
+	// SCANG_O
 	arma::vec CCT_p;
 	CCT_p.ones(2*w_num);
-
+	// SCANG_S
+	arma::vec CCT_ps;
+	CCT_ps.ones(w_num);
+	// SCANG_B
+	arma::vec CCT_pb;
+	CCT_pb.ones(w_num);
 
 	// Searching Algorithm
+	// SCANG_O
 	int num = 0;
 	arma::mat candidate(1, 4);
 	candidate.zeros();
@@ -107,6 +125,24 @@ List SCANG_O_Search_Relatedness_sp(arma::sp_mat G, arma::sp_mat Sigma_i, arma::m
 	double summax = -100000.0;
 	arma::mat candidatemax(1,4);
 	candidatemax.zeros();
+	
+	// SCANG_S
+	int num_s = 0;
+	arma::mat candidate_s(1, 4);
+	candidate_s.zeros();
+
+	double summax_s = -100000.0;
+	arma::mat candidatemax_s(1,4);
+	candidatemax_s.zeros();
+	
+	// SCANG_B
+	int num_b = 0;
+	arma::mat candidate_b(1, 4);
+	candidate_b.zeros();
+
+	double summax_b = -100000.0;
+	arma::mat candidatemax_b(1,4);
+	candidatemax_b.zeros();
 
 	int p = G.n_cols;
 	int q = Sigma_iX.n_cols;
@@ -347,14 +383,28 @@ List SCANG_O_Search_Relatedness_sp(arma::sp_mat G, arma::sp_mat Sigma_i, arma::m
 
 			for(ss = 0; ss < w_num; ss++)
 			{
+				// SCANG_O
 				CCT_p[ss*2] = sump_s(ss);
 				CCT_p[ss*2 + 1] = sump_b(ss);
+				// SCANG_S
+				CCT_ps[ss] = sump_s(ss);
+				// SCANG_B
+				CCT_pb[ss] = sump_b(ss);
 			}
 
+			// SCANG_O
 			sump_o = CCT_pval(CCT_p,CCT_weights);
 			sump_o = -log(sump_o);
-
-			if(sump_o > threshold)
+			// SCANG_S
+			sump_os = CCT_pval(CCT_ps,CCT_weights_s);
+			sump_os = -log(sump_os);
+			// SCANG_B
+			sump_ob = CCT_pval(CCT_pb,CCT_weights_b);
+			sump_ob = -log(sump_ob);		
+			
+			// Signal_regions
+			// SCANG_O
+			if(sump_o > threshold_o)
 			{
 				num = num + 1;
 				candidate.resize(num, 4);
@@ -362,13 +412,51 @@ List SCANG_O_Search_Relatedness_sp(arma::sp_mat G, arma::sp_mat Sigma_i, arma::m
 				candidate(num - 1, 1) = 1;
 				candidate(num - 1, 2) = i;
 			}
-
+			// SCANG_S
+			if(sump_os > threshold_s)
+			{
+				num_s = num_s + 1;
+				candidate_s.resize(num, 4);
+				candidate_s(num - 1, 0) = sump_os;
+				candidate_s(num - 1, 1) = 1;
+				candidate_s(num - 1, 2) = i;
+			}
+			// SCANG_B
+			if(sump_ob > threshold_b)
+			{
+				num_b = num_b + 1;
+				candidate_b.resize(num, 4);
+				candidate_b(num - 1, 0) = sump_os;
+				candidate_b(num - 1, 1) = 1;
+				candidate_b(num - 1, 2) = i;
+			}
+			
+			// TOP 1 Region
+			// SCANG_O
 			if(sump_o > summax)
 			{
 				summax = sump_o;
 				candidatemax(0,0) = sump_o;
-				candidatemax(0,1) = 1+begid-1;
-				candidatemax(0,2) = i+begid-1;
+				candidatemax(0,1) = 1 + begid - 1;
+				candidatemax(0,2) = i + begid - 1;
+			}
+			
+			// SCANG_S
+			if(sump_os > summax_s)
+			{
+				summax_s = sump_os;
+				candidatemax_s(0,0) = sump_os;
+				candidatemax_s(0,1) = 1 + begid - 1;
+				candidatemax_s(0,2) = i + begid - 1;
+			}
+			
+			// SCANG_B
+			if(sump_ob > summax_b)
+			{
+				summax_b = sump_ob;
+				candidatemax_b(0,0) = sump_ob;
+				candidatemax_b(0,1) = 1 + begid - 1;
+				candidatemax_b(0,2) = i + begid - 1;
 			}
 		}
 
@@ -505,14 +593,28 @@ List SCANG_O_Search_Relatedness_sp(arma::sp_mat G, arma::sp_mat Sigma_i, arma::m
 
 				for(ss = 0; ss < w_num; ss++)
 				{
+					// SCANG_O
 					CCT_p[ss*2] = sump_s(ss);
 					CCT_p[ss*2 + 1] = sump_b(ss);
+					// SCANG_S
+					CCT_ps[ss] = sump_s(ss);
+					// SCANG_B
+					CCT_pb[ss] = sump_b(ss);
 				}
 
+				// SCANG_O
 				sump_o = CCT_pval(CCT_p,CCT_weights);
 				sump_o = -log(sump_o);
-
-				if(sump_o > threshold)
+				// SCANG_S
+				sump_os = CCT_pval(CCT_ps,CCT_weights_s);
+				sump_os = -log(sump_os);
+				// SCANG_B
+				sump_ob = CCT_pval(CCT_pb,CCT_weights_b);
+				sump_ob = -log(sump_ob);		
+			
+				// Signal_regions
+				// SCANG_O
+				if(sump_o > threshold_o)
 				{
 					num = num + 1;
 					candidate.resize(num, 4);
@@ -520,7 +622,27 @@ List SCANG_O_Search_Relatedness_sp(arma::sp_mat G, arma::sp_mat Sigma_i, arma::m
 					candidate(num - 1, 1) = j + 1;
 					candidate(num - 1, 2) = j + i;
 				}
-
+				// SCANG_S
+				if(sump_os > threshold_s)
+				{
+					num_s = num_s + 1;
+					candidate_s.resize(num, 4);
+					candidate_s(num - 1, 0) = sump_os;
+					candidate_s(num - 1, 1) = j + 1;
+					candidate_s(num - 1, 2) = j + i;
+				}
+				// SCANG_B
+				if(sump_ob > threshold_b)
+				{
+					num_b = num_b + 1;
+					candidate_b.resize(num, 4);
+					candidate_b(num - 1, 0) = sump_os;
+					candidate_b(num - 1, 1) = j + 1;
+					candidate_b(num - 1, 2) = j + i;
+				}
+			
+				// TOP 1 Region
+				// SCANG_O
 				if(sump_o > summax)
 				{
 					summax = sump_o;
@@ -528,13 +650,31 @@ List SCANG_O_Search_Relatedness_sp(arma::sp_mat G, arma::sp_mat Sigma_i, arma::m
 					candidatemax(0,1) = j + 1 + begid - 1;
 					candidatemax(0,2) = j + i + begid - 1;
 				}
+			
+				// SCANG_S
+				if(sump_os > summax_s)
+				{
+					summax_s = sump_os;
+					candidatemax_s(0,0) = sump_os;
+					candidatemax_s(0,1) = j + 1 + begid - 1;
+					candidatemax_s(0,2) = j + i + begid - 1;
+				}
+			
+				// SCANG_B
+				if(sump_ob > summax_b)
+				{
+					summax_b = sump_ob;
+					candidatemax_b(0,0) = sump_ob;
+					candidatemax_b(0,1) = j + 1 + begid - 1;
+					candidatemax_b(0,2) = j + i + begid - 1;
+				}
 			}
 
 		}
 
 	}
 
-
+	// SCANG_O
 	arma::uvec indices = sort_index(-candidate.col(0));
 	candidate = candidate.rows(indices);
 
@@ -589,7 +729,120 @@ List SCANG_O_Search_Relatedness_sp(arma::sp_mat G, arma::sp_mat Sigma_i, arma::m
 			res(num1 - 1, 2) = candidate(kk, 2) + begid - 1;
 		}
 	}
-	return List::create(Named("res") = res, Named("resmost") = candidatemax);
+	
+	// SCANG_S
+	arma::uvec indices_s = sort_index(-candidate_s.col(0));
+	candidate_s = candidate_s.rows(indices_s);
+
+	double loc_left_s = 0;
+	double loc_right_s = 0;
+
+	for (ii = 0; ii < (num_s-1); ii++)
+	{
+		if (candidate_s(ii,3) < 1)
+		{
+			for (jj = ii + 1; jj < num_s; jj++)
+			{
+				if(candidate_s(ii, 1) < candidate_s(jj, 1))
+				{
+					loc_left_s = candidate_s(jj, 1);
+				}else
+				{
+					loc_left_s = candidate_s(ii, 1);
+				}
+				if(candidate_s(ii, 2) < candidate_s(jj, 2))
+				{
+					loc_right_s = candidate_s(ii, 2);
+				}else
+				{
+					loc_right_s = candidate_s(jj, 2);
+				}
+
+				if (loc_right_s > loc_left_s - 1)
+				{
+					if((loc_right_s-loc_left_s + 1)/(candidate_s(jj,2) - candidate_s(jj,1) + 1) > f)
+					{
+						candidate_s(jj, 3) = 1;
+					}
+
+
+				}
+			}
+		}
+	}
+
+	int num1_s = 0;
+	arma::mat res_s(1, 4);
+	res_s.zeros();
+	for (kk = 0; kk<num_s; kk++)
+	{
+		if (candidate_s(kk, 3)<1)
+		{
+			num1_s = num1_s + 1;
+			res_s.resize(num1_s, 4);
+			res_s(num1_s - 1, 0) = candidate_s(kk, 0);
+			res_s(num1_s - 1, 1) = candidate_s(kk, 1) + begid - 1;
+			res_s(num1_s - 1, 2) = candidate_s(kk, 2) + begid - 1;
+		}
+	}
+	
+	// SCANG_B
+	arma::uvec indices_b = sort_index(-candidate_b.col(0));
+	candidate_b = candidate_b.rows(indices_b);
+
+	double loc_left_b = 0;
+	double loc_right_b = 0;
+
+	for (ii = 0; ii < (num_b-1); ii++)
+	{
+		if (candidate_b(ii,3) < 1)
+		{
+			for (jj = ii + 1; jj < num_b; jj++)
+			{
+				if(candidate_b(ii, 1) < candidate_b(jj, 1))
+				{
+					loc_left_b = candidate_b(jj, 1);
+				}else
+				{
+					loc_left_b = candidate_b(ii, 1);
+				}
+				if(candidate_b(ii, 2) < candidate_b(jj, 2))
+				{
+					loc_right_b = candidate_b(ii, 2);
+				}else
+				{
+					loc_right_b = candidate_b(jj, 2);
+				}
+
+				if (loc_right_b > loc_left_b - 1)
+				{
+					if((loc_right_b-loc_left_b + 1)/(candidate_b(jj,2) - candidate_b(jj,1) + 1) > f)
+					{
+						candidate_b(jj, 3) = 1;
+					}
+
+
+				}
+			}
+		}
+	}
+
+	int num1_b = 0;
+	arma::mat res_b(1, 4);
+	res_b.zeros();
+	for (kk = 0; kk < num_b; kk++)
+	{
+		if (candidate_b(kk, 3)<1)
+		{
+			num1_b = num1_b + 1;
+			res_b.resize(num1_b, 4);
+			res_b(num1_b - 1, 0) = candidate_b(kk, 0);
+			res_b(num1_b - 1, 1) = candidate_b(kk, 1) + begid - 1;
+			res_b(num1_b - 1, 2) = candidate_b(kk, 2) + begid - 1;
+		}
+	}
+	
+	return List::create(Named("res_o") = res, Named("resmost_o") = candidatemax, Named("res_s") = res_s, Named("resmost_s") = candidatemax_s, Named("res_b") = res_b, Named("resmost_b") = candidatemax_b);
 
 }
 

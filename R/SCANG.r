@@ -241,8 +241,8 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 				}
 
 				restemp <- SCANG_O_Search_Relatedness_sp(genotypesub,Sigma_i,Sigma_iX,cov,residuals.phenotype,th0_O,Lmax,Lmin,steplength,weightssub_B,weightssub_S,begid,filter,f)
-				res_O <- rbind(res_O,restemp$res)
-				resmost_O <- rbind(resmost_O,restemp$resmost)
+				res_O <- rbind(res_O,restemp$res_o)
+				resmost_O <- rbind(resmost_O,restemp$resmost_o)
 
 				##### SCANG-S
 				L20_S[i,] <- threstemp[2,]
@@ -254,9 +254,8 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 					th0_S = -log(filter)
 				}
 
-				restemp <- SCANG_S_Search_Relatedness_sp(genotypesub,Sigma_i,Sigma_iX,cov,residuals.phenotype,th0_S,Lmax,Lmin,steplength,weightssub_S,begid,filter,f)
-				res_S <- rbind(res_S,restemp$res)
-				resmost_S <- rbind(resmost_S,restemp$resmost)
+				res_S <- rbind(res_S,restemp$res_s)
+				resmost_S <- rbind(resmost_S,restemp$resmost_s)
 
 
 				## SCANG-B
@@ -269,9 +268,8 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 					th0_B = -log(filter)
 				}
 
-				restemp <- SCANG_B_Search_Relatedness_sp(genotypesub,Sigma_i,Sigma_iX,cov,residuals.phenotype,th0_B,Lmax,Lmin,steplength,weightssub_B,begid,filter,f)
-				res_B <- rbind(res_B,restemp$res)
-				resmost_B <- rbind(resmost_B,restemp$resmost)
+				res_B <- rbind(res_B,restemp$res_b)
+				resmost_B <- rbind(resmost_B,restemp$resmost_b)
 			}
 		}else
 		{
