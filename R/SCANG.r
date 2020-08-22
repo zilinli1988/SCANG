@@ -240,7 +240,7 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 					th0_O = -log(filter)
 				}
 
-				restemp <- SCANG_O_Search_Relatedness_sp(genotypesub,Sigma_i,Sigma_iX,cov,residuals.phenotype,th0_O,Lmax,Lmin,steplength,weightssub_B,weightssub_S,begid,filter,f)
+				restemp <- SCANG_O_Search_Relatedness_sp(genotypesub,Sigma_i,Sigma_iX,cov,residuals.phenotype,th0_O,th0_S,th0_B,Lmax,Lmin,steplength,weightssub_B,weightssub_S,begid,filter,f)
 				res_O <- rbind(res_O,restemp$res_o)
 				resmost_O <- rbind(resmost_O,restemp$resmost_o)
 
