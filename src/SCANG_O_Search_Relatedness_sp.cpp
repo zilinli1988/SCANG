@@ -626,19 +626,19 @@ List SCANG_O_Search_Relatedness_sp(arma::sp_mat G, arma::sp_mat Sigma_i, arma::m
 				if(sump_os > threshold_s)
 				{
 					num_s = num_s + 1;
-					candidate_s.resize(num, 4);
-					candidate_s(num - 1, 0) = sump_os;
-					candidate_s(num - 1, 1) = j + 1;
-					candidate_s(num - 1, 2) = j + i;
+					candidate_s.resize(num_s, 4);
+					candidate_s(num_s - 1, 0) = sump_os;
+					candidate_s(num_s - 1, 1) = j + 1;
+					candidate_s(num_s - 1, 2) = j + i;
 				}
 				// SCANG_B
 				if(sump_ob > threshold_b)
 				{
 					num_b = num_b + 1;
-					candidate_b.resize(num, 4);
-					candidate_b(num - 1, 0) = sump_os;
-					candidate_b(num - 1, 1) = j + 1;
-					candidate_b(num - 1, 2) = j + i;
+					candidate_b.resize(num_b, 4);
+					candidate_b(num_b - 1, 0) = sump_ob;
+					candidate_b(num_b - 1, 1) = j + 1;
+					candidate_b(num_b - 1, 2) = j + i;
 				}
 			
 				// TOP 1 Region
