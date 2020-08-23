@@ -103,54 +103,9 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// SCANG_B_Search
-List SCANG_B_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma, int fam, arma::vec residuals, const double threshold, const int Lmax, const int Lmin, int steplength, arma::mat weights, const int begid, const double filter, const double f);
-RcppExport SEXP _SCANG_SCANG_B_Search(SEXP GSEXP, SEXP XSEXP, SEXP workingSEXP, SEXP sigmaSEXP, SEXP famSEXP, SEXP residualsSEXP, SEXP thresholdSEXP, SEXP LmaxSEXP, SEXP LminSEXP, SEXP steplengthSEXP, SEXP weightsSEXP, SEXP begidSEXP, SEXP filterSEXP, SEXP fSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type G(GSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type X(XSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type working(workingSEXP);
-    Rcpp::traits::input_parameter< double >::type sigma(sigmaSEXP);
-    Rcpp::traits::input_parameter< int >::type fam(famSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type residuals(residualsSEXP);
-    Rcpp::traits::input_parameter< const double >::type threshold(thresholdSEXP);
-    Rcpp::traits::input_parameter< const int >::type Lmax(LmaxSEXP);
-    Rcpp::traits::input_parameter< const int >::type Lmin(LminSEXP);
-    Rcpp::traits::input_parameter< int >::type steplength(steplengthSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type weights(weightsSEXP);
-    Rcpp::traits::input_parameter< const int >::type begid(begidSEXP);
-    Rcpp::traits::input_parameter< const double >::type filter(filterSEXP);
-    Rcpp::traits::input_parameter< const double >::type f(fSEXP);
-    rcpp_result_gen = Rcpp::wrap(SCANG_B_Search(G, X, working, sigma, fam, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f));
-    return rcpp_result_gen;
-END_RCPP
-}
-// SCANG_B_Search_Relatedness
-List SCANG_B_Search_Relatedness(arma::sp_mat G, arma::mat P, arma::vec residuals, const double threshold, const int Lmax, const int Lmin, int steplength, arma::mat weights, const int begid, const double filter, const double f);
-RcppExport SEXP _SCANG_SCANG_B_Search_Relatedness(SEXP GSEXP, SEXP PSEXP, SEXP residualsSEXP, SEXP thresholdSEXP, SEXP LmaxSEXP, SEXP LminSEXP, SEXP steplengthSEXP, SEXP weightsSEXP, SEXP begidSEXP, SEXP filterSEXP, SEXP fSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type G(GSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type P(PSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type residuals(residualsSEXP);
-    Rcpp::traits::input_parameter< const double >::type threshold(thresholdSEXP);
-    Rcpp::traits::input_parameter< const int >::type Lmax(LmaxSEXP);
-    Rcpp::traits::input_parameter< const int >::type Lmin(LminSEXP);
-    Rcpp::traits::input_parameter< int >::type steplength(steplengthSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type weights(weightsSEXP);
-    Rcpp::traits::input_parameter< const int >::type begid(begidSEXP);
-    Rcpp::traits::input_parameter< const double >::type filter(filterSEXP);
-    Rcpp::traits::input_parameter< const double >::type f(fSEXP);
-    rcpp_result_gen = Rcpp::wrap(SCANG_B_Search_Relatedness(G, P, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f));
-    return rcpp_result_gen;
-END_RCPP
-}
 // SCANG_O_Search
-List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma, int fam, arma::vec residuals, const double threshold, const int Lmax, const int Lmin, int steplength, arma::mat weights_B, arma::mat weights_S, const int begid, const double filter, const double f);
-RcppExport SEXP _SCANG_SCANG_O_Search(SEXP GSEXP, SEXP XSEXP, SEXP workingSEXP, SEXP sigmaSEXP, SEXP famSEXP, SEXP residualsSEXP, SEXP thresholdSEXP, SEXP LmaxSEXP, SEXP LminSEXP, SEXP steplengthSEXP, SEXP weights_BSEXP, SEXP weights_SSEXP, SEXP begidSEXP, SEXP filterSEXP, SEXP fSEXP) {
+List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma, int fam, arma::vec residuals, const double threshold_o, const double threshold_s, const double threshold_b, const int Lmax, const int Lmin, int steplength, arma::mat weights_B, arma::mat weights_S, const int begid, const double filter, const double f);
+RcppExport SEXP _SCANG_SCANG_O_Search(SEXP GSEXP, SEXP XSEXP, SEXP workingSEXP, SEXP sigmaSEXP, SEXP famSEXP, SEXP residualsSEXP, SEXP threshold_oSEXP, SEXP threshold_sSEXP, SEXP threshold_bSEXP, SEXP LmaxSEXP, SEXP LminSEXP, SEXP steplengthSEXP, SEXP weights_BSEXP, SEXP weights_SSEXP, SEXP begidSEXP, SEXP filterSEXP, SEXP fSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -160,7 +115,9 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type sigma(sigmaSEXP);
     Rcpp::traits::input_parameter< int >::type fam(famSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type residuals(residualsSEXP);
-    Rcpp::traits::input_parameter< const double >::type threshold(thresholdSEXP);
+    Rcpp::traits::input_parameter< const double >::type threshold_o(threshold_oSEXP);
+    Rcpp::traits::input_parameter< const double >::type threshold_s(threshold_sSEXP);
+    Rcpp::traits::input_parameter< const double >::type threshold_b(threshold_bSEXP);
     Rcpp::traits::input_parameter< const int >::type Lmax(LmaxSEXP);
     Rcpp::traits::input_parameter< const int >::type Lmin(LminSEXP);
     Rcpp::traits::input_parameter< int >::type steplength(steplengthSEXP);
@@ -169,20 +126,22 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const int >::type begid(begidSEXP);
     Rcpp::traits::input_parameter< const double >::type filter(filterSEXP);
     Rcpp::traits::input_parameter< const double >::type f(fSEXP);
-    rcpp_result_gen = Rcpp::wrap(SCANG_O_Search(G, X, working, sigma, fam, residuals, threshold, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f));
+    rcpp_result_gen = Rcpp::wrap(SCANG_O_Search(G, X, working, sigma, fam, residuals, threshold_o, threshold_s, threshold_b, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f));
     return rcpp_result_gen;
 END_RCPP
 }
 // SCANG_O_Search_Relatedness
-List SCANG_O_Search_Relatedness(arma::sp_mat G, arma::mat P, arma::vec residuals, const double threshold, const int Lmax, const int Lmin, int steplength, arma::mat weights_B, arma::mat weights_S, const int begid, const double filter, const double f);
-RcppExport SEXP _SCANG_SCANG_O_Search_Relatedness(SEXP GSEXP, SEXP PSEXP, SEXP residualsSEXP, SEXP thresholdSEXP, SEXP LmaxSEXP, SEXP LminSEXP, SEXP steplengthSEXP, SEXP weights_BSEXP, SEXP weights_SSEXP, SEXP begidSEXP, SEXP filterSEXP, SEXP fSEXP) {
+List SCANG_O_Search_Relatedness(arma::sp_mat G, arma::mat P, arma::vec residuals, const double threshold_o, const double threshold_s, const double threshold_b, const int Lmax, const int Lmin, int steplength, arma::mat weights_B, arma::mat weights_S, const int begid, const double filter, const double f);
+RcppExport SEXP _SCANG_SCANG_O_Search_Relatedness(SEXP GSEXP, SEXP PSEXP, SEXP residualsSEXP, SEXP threshold_oSEXP, SEXP threshold_sSEXP, SEXP threshold_bSEXP, SEXP LmaxSEXP, SEXP LminSEXP, SEXP steplengthSEXP, SEXP weights_BSEXP, SEXP weights_SSEXP, SEXP begidSEXP, SEXP filterSEXP, SEXP fSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::sp_mat >::type G(GSEXP);
     Rcpp::traits::input_parameter< arma::mat >::type P(PSEXP);
     Rcpp::traits::input_parameter< arma::vec >::type residuals(residualsSEXP);
-    Rcpp::traits::input_parameter< const double >::type threshold(thresholdSEXP);
+    Rcpp::traits::input_parameter< const double >::type threshold_o(threshold_oSEXP);
+    Rcpp::traits::input_parameter< const double >::type threshold_s(threshold_sSEXP);
+    Rcpp::traits::input_parameter< const double >::type threshold_b(threshold_bSEXP);
     Rcpp::traits::input_parameter< const int >::type Lmax(LmaxSEXP);
     Rcpp::traits::input_parameter< const int >::type Lmin(LminSEXP);
     Rcpp::traits::input_parameter< int >::type steplength(steplengthSEXP);
@@ -191,7 +150,7 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const int >::type begid(begidSEXP);
     Rcpp::traits::input_parameter< const double >::type filter(filterSEXP);
     Rcpp::traits::input_parameter< const double >::type f(fSEXP);
-    rcpp_result_gen = Rcpp::wrap(SCANG_O_Search_Relatedness(G, P, residuals, threshold, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f));
+    rcpp_result_gen = Rcpp::wrap(SCANG_O_Search_Relatedness(G, P, residuals, threshold_o, threshold_s, threshold_b, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -285,51 +244,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// SCANG_S_Search
-List SCANG_S_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma, int fam, arma::vec residuals, const double threshold, const int Lmax, const int Lmin, int steplength, arma::mat weights, const int begid, const double filter, const double f);
-RcppExport SEXP _SCANG_SCANG_S_Search(SEXP GSEXP, SEXP XSEXP, SEXP workingSEXP, SEXP sigmaSEXP, SEXP famSEXP, SEXP residualsSEXP, SEXP thresholdSEXP, SEXP LmaxSEXP, SEXP LminSEXP, SEXP steplengthSEXP, SEXP weightsSEXP, SEXP begidSEXP, SEXP filterSEXP, SEXP fSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type G(GSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type X(XSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type working(workingSEXP);
-    Rcpp::traits::input_parameter< double >::type sigma(sigmaSEXP);
-    Rcpp::traits::input_parameter< int >::type fam(famSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type residuals(residualsSEXP);
-    Rcpp::traits::input_parameter< const double >::type threshold(thresholdSEXP);
-    Rcpp::traits::input_parameter< const int >::type Lmax(LmaxSEXP);
-    Rcpp::traits::input_parameter< const int >::type Lmin(LminSEXP);
-    Rcpp::traits::input_parameter< int >::type steplength(steplengthSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type weights(weightsSEXP);
-    Rcpp::traits::input_parameter< const int >::type begid(begidSEXP);
-    Rcpp::traits::input_parameter< const double >::type filter(filterSEXP);
-    Rcpp::traits::input_parameter< const double >::type f(fSEXP);
-    rcpp_result_gen = Rcpp::wrap(SCANG_S_Search(G, X, working, sigma, fam, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f));
-    return rcpp_result_gen;
-END_RCPP
-}
-// SCANG_S_Search_Relatedness
-List SCANG_S_Search_Relatedness(arma::sp_mat G, arma::mat P, arma::vec residuals, const double threshold, const int Lmax, const int Lmin, int steplength, arma::mat weights, const int begid, const double filter, const double f);
-RcppExport SEXP _SCANG_SCANG_S_Search_Relatedness(SEXP GSEXP, SEXP PSEXP, SEXP residualsSEXP, SEXP thresholdSEXP, SEXP LmaxSEXP, SEXP LminSEXP, SEXP steplengthSEXP, SEXP weightsSEXP, SEXP begidSEXP, SEXP filterSEXP, SEXP fSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::sp_mat >::type G(GSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type P(PSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type residuals(residualsSEXP);
-    Rcpp::traits::input_parameter< const double >::type threshold(thresholdSEXP);
-    Rcpp::traits::input_parameter< const int >::type Lmax(LmaxSEXP);
-    Rcpp::traits::input_parameter< const int >::type Lmin(LminSEXP);
-    Rcpp::traits::input_parameter< int >::type steplength(steplengthSEXP);
-    Rcpp::traits::input_parameter< arma::mat >::type weights(weightsSEXP);
-    Rcpp::traits::input_parameter< const int >::type begid(begidSEXP);
-    Rcpp::traits::input_parameter< const double >::type filter(filterSEXP);
-    Rcpp::traits::input_parameter< const double >::type f(fSEXP);
-    rcpp_result_gen = Rcpp::wrap(SCANG_S_Search_Relatedness(G, P, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f));
-    return rcpp_result_gen;
-END_RCPP
-}
 // Saddle
 double Saddle(double q, arma::vec egvalues);
 RcppExport SEXP _SCANG_Saddle(SEXP qSEXP, SEXP egvaluesSEXP) {
@@ -395,16 +309,12 @@ static const R_CallMethodDef CallEntries[] = {
     {"_SCANG_K1", (DL_FUNC) &_SCANG_K1, 3},
     {"_SCANG_K2", (DL_FUNC) &_SCANG_K2, 2},
     {"_SCANG_Liumod", (DL_FUNC) &_SCANG_Liumod, 2},
-    {"_SCANG_SCANG_B_Search", (DL_FUNC) &_SCANG_SCANG_B_Search, 14},
-    {"_SCANG_SCANG_B_Search_Relatedness", (DL_FUNC) &_SCANG_SCANG_B_Search_Relatedness, 11},
-    {"_SCANG_SCANG_O_Search", (DL_FUNC) &_SCANG_SCANG_O_Search, 15},
-    {"_SCANG_SCANG_O_Search_Relatedness", (DL_FUNC) &_SCANG_SCANG_O_Search_Relatedness, 12},
+    {"_SCANG_SCANG_O_Search", (DL_FUNC) &_SCANG_SCANG_O_Search, 17},
+    {"_SCANG_SCANG_O_Search_Relatedness", (DL_FUNC) &_SCANG_SCANG_O_Search_Relatedness, 14},
     {"_SCANG_SCANG_O_Search_Relatedness_sp", (DL_FUNC) &_SCANG_SCANG_O_Search_Relatedness_sp, 16},
     {"_SCANG_SCANG_O_Thres", (DL_FUNC) &_SCANG_SCANG_O_Thres, 12},
     {"_SCANG_SCANG_O_Thres_Relatedness", (DL_FUNC) &_SCANG_SCANG_O_Thres_Relatedness, 10},
     {"_SCANG_SCANG_O_Thres_Relatedness_sp", (DL_FUNC) &_SCANG_SCANG_O_Thres_Relatedness_sp, 12},
-    {"_SCANG_SCANG_S_Search", (DL_FUNC) &_SCANG_SCANG_S_Search, 14},
-    {"_SCANG_SCANG_S_Search_Relatedness", (DL_FUNC) &_SCANG_SCANG_S_Search_Relatedness, 11},
     {"_SCANG_Saddle", (DL_FUNC) &_SCANG_Saddle, 2},
     {"_SCANG_maxO", (DL_FUNC) &_SCANG_maxO, 10},
     {"_SCANG_regionfilter", (DL_FUNC) &_SCANG_regionfilter, 2},

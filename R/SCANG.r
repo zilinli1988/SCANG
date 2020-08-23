@@ -174,7 +174,7 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 
 				begid <- subnum*(i-1)+1
 
-				##### SCANG-O
+				##### SCANG-O-threshold
 				L20_O[i,] <- threstemp[1,]
 
 				emL20_O <- apply(L20_O,2,max)
@@ -183,13 +183,7 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 				{
 					th0_O = -log(filter)
 				}
-
-				restemp <- SCANG_O_Search_Relatedness(genotypesub,obj_nullmodel$P,residuals.phenotype,th0_O,Lmax,Lmin,steplength,weightssub_B,weightssub_S,begid,filter,f)
-				res_O <- rbind(res_O,restemp$res)
-				resmost_O <- rbind(resmost_O,restemp$resmost)
-
-
-				##### SCANG-S
+				##### SCANG-S-threshold
 				L20_S[i,] <- threstemp[2,]
 
 				emL20_S <- apply(L20_S,2,max)
@@ -198,12 +192,7 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 				{
 					th0_S = -log(filter)
 				}
-
-				restemp <- SCANG_S_Search_Relatedness(genotypesub,obj_nullmodel$P,residuals.phenotype,th0_S,Lmax,Lmin,steplength,weightssub_S,begid,filter,f)
-				res_S <- rbind(res_S,restemp$res)
-				resmost_S <- rbind(resmost_S,restemp$resmost)
-
-				##### SCANG-B
+				##### SCANG-B-threshold
 				L20_B[i,] <- threstemp[3,]
 
 				emL20_B <- apply(L20_B,2,max)
@@ -213,9 +202,21 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 					th0_B = -log(filter)
 				}
 
-				restemp <- SCANG_B_Search_Relatedness(genotypesub,obj_nullmodel$P,residuals.phenotype,th0_B,Lmax,Lmin,steplength,weightssub_B,begid,filter,f)
-				res_B <- rbind(res_B,restemp$res)
-				resmost_B <- rbind(resmost_B,restemp$resmost)
+				##### SCANG-O(-S;-B)
+				restemp <- SCANG_O_Search_Relatedness(genotypesub,obj_nullmodel$P,residuals.phenotype,th0_O,th0_S,th0_B,Lmax,Lmin,steplength,weightssub_B,weightssub_S,begid,filter,f)
+				
+				##### SCANG-O
+				res_O <- rbind(res_O,restemp$res_o)
+				resmost_O <- rbind(resmost_O,restemp$resmost_o)
+
+				##### SCANG-S
+				res_S <- rbind(res_S,restemp$res_s)
+				resmost_S <- rbind(resmost_S,restemp$resmost_s)
+
+
+				## SCANG-B
+				res_B <- rbind(res_B,restemp$res_b)
+				resmost_B <- rbind(resmost_B,restemp$resmost_b)
 
 			}else
 			{
@@ -258,8 +259,10 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 					th0_B = -log(filter)
 				}
 
-				##### SCANG-O
+				##### SCANG-O(-S;-B)
 				restemp <- SCANG_O_Search_Relatedness_sp(genotypesub,Sigma_i,Sigma_iX,cov,residuals.phenotype,th0_O,th0_S,th0_B,Lmax,Lmin,steplength,weightssub_B,weightssub_S,begid,filter,f)
+				
+				##### SCANG-O
 				res_O <- rbind(res_O,restemp$res_o)
 				resmost_O <- rbind(resmost_O,restemp$resmost_o)
 
@@ -295,7 +298,7 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 
 			begid <- subnum*(i-1)+1
 
-			##### SCANG-O
+			##### SCANG-O-threshold
 			L20_O[i,] <- threstemp[1,]
 
 			emL20_O <- apply(L20_O,2,max)
@@ -304,12 +307,7 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 			{
 				th0_O = -log(filter)
 			}
-
-			restemp <- SCANG_O_Search(genotypesub,X,working,sigma,fam,residuals.phenotype,th0_O,Lmax,Lmin,steplength,weightssub_B,weightssub_S,begid,filter,f)
-			res_O <- rbind(res_O,restemp$res)
-			resmost_O <- rbind(resmost_O,restemp$resmost)
-
-			##### SCANG-S
+			##### SCANG-S-threshold
 			L20_S[i,] <- threstemp[2,]
 
 			emL20_S <- apply(L20_S,2,max)
@@ -318,12 +316,7 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 			{
 				th0_S = -log(filter)
 			}
-
-			restemp <- SCANG_S_Search(genotypesub,X,working,sigma,fam,residuals.phenotype,th0_S,Lmax,Lmin,steplength,weightssub_S,begid,filter,f)
-			res_S <- rbind(res_S,restemp$res)
-			resmost_S <- rbind(resmost_S,restemp$resmost)
-
-			## SCANG-B
+			##### SCANG-B-threshold
 			L20_B[i,] <- threstemp[3,]
 
 			emL20_B <- apply(L20_B,2,max)
@@ -333,9 +326,21 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 				th0_B = -log(filter)
 			}
 
-			restemp <- SCANG_B_Search(genotypesub,X,working,sigma,fam,residuals.phenotype,th0_B,Lmax,Lmin,steplength,weightssub_B,begid,filter,f)
-			res_B <- rbind(res_B,restemp$res)
-			resmost_B <- rbind(resmost_B,restemp$resmost)
+			##### SCANG-O(-S;-B)
+			restemp <- SCANG_O_Search(genotypesub,X,working,sigma,fam,residuals.phenotype,th0_O,th0_S,th0_B,Lmax,Lmin,steplength,weightssub_B,weightssub_S,begid,filter,f)
+			
+			##### SCANG-O
+			res_O <- rbind(res_O,restemp$res_o)
+			resmost_O <- rbind(resmost_O,restemp$resmost_o)
+
+			##### SCANG-S
+			res_S <- rbind(res_S,restemp$res_s)
+			resmost_S <- rbind(resmost_S,restemp$resmost_s)
+
+
+			## SCANG-B
+			res_B <- rbind(res_B,restemp$res_b)
+			resmost_B <- rbind(resmost_B,restemp$resmost_b)
 		}
 	}
 

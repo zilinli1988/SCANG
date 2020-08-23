@@ -200,7 +200,8 @@ We apply SCANG to analyze the simulated data set. Note that the GRM is sparse ma
 ```{r}
 # obj_nullmodel <- fit_null_glmmkin_SCANG(phenotype ~ -1+X, data=phenotypedata_relatedness, kins=kins, id="id",family=gaussian(link="identity"))
 
-# res_lmm <- SCANG(genotype=genotype,obj_nullmodel=obj_nullmodel,Lmin=Lmin,Lmax=Lmax,filter=filter,f=f)
+# res_lmm <- SCANG(genotype,obj_nullmodel,Lmin,Lmax,filter=filter,f=f)
+
 ```
 SCANG-O detected 2 significant signal regions, which are listed as follows:
 ```{r}

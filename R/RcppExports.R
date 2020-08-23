@@ -33,20 +33,12 @@ Liumod <- function(Cov, q) {
     .Call(`_SCANG_Liumod`, Cov, q)
 }
 
-SCANG_B_Search <- function(G, X, working, sigma, fam, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f) {
-    .Call(`_SCANG_SCANG_B_Search`, G, X, working, sigma, fam, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f)
+SCANG_O_Search <- function(G, X, working, sigma, fam, residuals, threshold_o, threshold_s, threshold_b, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f) {
+    .Call(`_SCANG_SCANG_O_Search`, G, X, working, sigma, fam, residuals, threshold_o, threshold_s, threshold_b, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f)
 }
 
-SCANG_B_Search_Relatedness <- function(G, P, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f) {
-    .Call(`_SCANG_SCANG_B_Search_Relatedness`, G, P, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f)
-}
-
-SCANG_O_Search <- function(G, X, working, sigma, fam, residuals, threshold, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f) {
-    .Call(`_SCANG_SCANG_O_Search`, G, X, working, sigma, fam, residuals, threshold, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f)
-}
-
-SCANG_O_Search_Relatedness <- function(G, P, residuals, threshold, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f) {
-    .Call(`_SCANG_SCANG_O_Search_Relatedness`, G, P, residuals, threshold, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f)
+SCANG_O_Search_Relatedness <- function(G, P, residuals, threshold_o, threshold_s, threshold_b, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f) {
+    .Call(`_SCANG_SCANG_O_Search_Relatedness`, G, P, residuals, threshold_o, threshold_s, threshold_b, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f)
 }
 
 SCANG_O_Search_Relatedness_sp <- function(G, Sigma_i, Sigma_iX, cov, residuals, threshold_o, threshold_s, threshold_b, Lmax, Lmin, steplength, weights_B, weights_S, begid, filter, f) {
@@ -63,14 +55,6 @@ SCANG_O_Thres_Relatedness <- function(G, P, pesudo_residuals, times, Lmax, Lmin,
 
 SCANG_O_Thres_Relatedness_sp <- function(G, Sigma_i, Sigma_iX, cov, pesudo_residuals, times, Lmax, Lmin, steplength, weights_B, weights_S, filter) {
     .Call(`_SCANG_SCANG_O_Thres_Relatedness_sp`, G, Sigma_i, Sigma_iX, cov, pesudo_residuals, times, Lmax, Lmin, steplength, weights_B, weights_S, filter)
-}
-
-SCANG_S_Search <- function(G, X, working, sigma, fam, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f) {
-    .Call(`_SCANG_SCANG_S_Search`, G, X, working, sigma, fam, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f)
-}
-
-SCANG_S_Search_Relatedness <- function(G, P, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f) {
-    .Call(`_SCANG_SCANG_S_Search_Relatedness`, G, P, residuals, threshold, Lmax, Lmin, steplength, weights, begid, filter, f)
 }
 
 Saddle <- function(q, egvalues) {
