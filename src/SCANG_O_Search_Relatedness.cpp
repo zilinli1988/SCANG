@@ -1,25 +1,14 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
+#include <STAAR.h>
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 #include <math.h>
+using namespace STAAR;
 using namespace Rcpp;
 
-// declare K
-double K(double x, arma::vec egvalues);
-// declare K1 (first derivative)
-double K1(double x, arma::vec egvalues, double q);
-// declare K2 (second derivative)
-double K2(double x, arma::vec egvalues);
-// declare bisection
-double Bisection(arma::vec egvalues, double q, double xmin, double xmax);
-// declare saddlepoint
-double Saddle(double q, arma::vec egvalues);
 // declare Liumod
 double Liumod(arma::mat Cov, double q);
-// declare CCT_pval
-double CCT_pval(arma::vec x, arma::vec weights);
-
 
 // [[Rcpp::export]]
 List SCANG_O_Search_Relatedness(arma::sp_mat G, arma::mat P, arma::vec residuals, const double threshold_o, const double threshold_s, const double threshold_b, const int Lmax, const int Lmin, int steplength, arma::mat weights_B, arma::mat weights_S, const int begid, const double filter, const double f)

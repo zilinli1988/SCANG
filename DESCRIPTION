@@ -8,11 +8,11 @@ Maintainer: Zilin Li <li@hsph.harvard.edu>, Xihao Li <xihaoli@g.harvard.edu>
 Description: R package for performing SCANG procedure in whole genome squencing studies.
 License: GPL-3
 Copyright: See COPYRIGHTS for details.
-Imports: Rcpp, GMMAT, Matrix, GENESIS, kinship2
+Imports: Rcpp, GMMAT, Matrix, GENESIS, STAAR, kinship2
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.0.0)
-LinkingTo: Rcpp, RcppArmadillo
+LinkingTo: Rcpp, RcppArmadillo, STAAR
 RoxygenNote: 6.1.1
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr

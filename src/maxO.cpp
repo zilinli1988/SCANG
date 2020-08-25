@@ -1,15 +1,11 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
+#include <STAAR.h>
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 #include <math.h>
+using namespace STAAR;
 using namespace Rcpp;
-// declare saddlepoint
-double Saddle(double q, arma::vec egvalues);
-// declare Liumod
-double Liumod(arma::mat Cov, double q);
-// declare CCT_pval
-double CCT_pval(arma::vec x, arma::vec weights);
 
 // [[Rcpp::export]]
 arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat weights_B, arma::mat weights_S, arma::mat Cov, double filter, int times)

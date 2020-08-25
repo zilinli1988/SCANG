@@ -1,25 +1,14 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
+#include <STAAR.h>
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 #include <math.h>
+using namespace STAAR;
 using namespace Rcpp;
 
-// declare K
-double K(double x, arma::vec egvalues);
-// declare K1 (first derivative)
-double K1(double x, arma::vec egvalues, double q);
-// declare K2 (second derivative)
-double K2(double x, arma::vec egvalues);
-// declare bisection
-double Bisection(arma::vec egvalues, double q, double xmin, double xmax);
-// declare saddlepoint
-double Saddle(double q, arma::vec egvalues);
 // declare Liumod
 double Liumod(arma::mat Cov, double q);
-// declare CCT_pval
-double CCT_pval(arma::vec x, arma::vec weights);
-
 
 // [[Rcpp::export]]
 List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma, int fam, arma::vec residuals, const double threshold_o, const double threshold_s, const double threshold_b, const int Lmax, const int Lmin, int steplength, arma::mat weights_B, arma::mat weights_S, const int begid, const double filter, const double f)
@@ -125,7 +114,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 	double summax = -100000.0;
 	arma::mat candidatemax(1,4);
 	candidatemax.zeros();
-	
+
 	// SCANG_S
 	int num_s = 0;
 	arma::mat candidate_s(1, 4);
@@ -134,7 +123,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 	double summax_s = -100000.0;
 	arma::mat candidatemax_s(1,4);
 	candidatemax_s.zeros();
-	
+
 	// SCANG_B
 	int num_b = 0;
 	arma::mat candidate_b(1, 4);
@@ -165,11 +154,11 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 	// SKAT
 	arma::mat Covw_S;
 	Covw_S.zeros(w_num*p,p);
-	
+
 	// t(X)*G
 	arma::mat tX_G;
 	tX_G.zeros(q,p);
-	
+
 	if(fam == 0)
 	{
 		tX_G = trans(X)*G;
@@ -189,8 +178,8 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 	// SKAT
 	arma::vec weights_vec_S;
 	weights_vec_S.zeros(p);
-	
-	
+
+
 
 	for(k = 0; k < w_num; k++)
 	{
@@ -204,7 +193,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 		Covw_B(arma::span(k*p, (k+1)*p - 1), arma::span(0, p - 1)) = W%Cov;
 		W.each_row() = trans(weights_vec_B);
 		Covw_B(arma::span(k*p, (k+1)*p - 1), arma::span(0, p - 1)) = Covw_B(arma::span(k*p, (k+1)*p - 1), arma::span(0, p - 1))%W;
-		
+
 		// SKAT
 		for(kk = 0; kk < p; kk++)
 		{
@@ -215,7 +204,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 		Covw_S(arma::span(k*p, (k+1)*p - 1), arma::span(0, p - 1)) = W%Cov;
 		W.each_row() = trans(weights_vec_S);
 		Covw_S(arma::span(k*p, (k+1)*p - 1), arma::span(0, p - 1)) = Covw_S(arma::span(k*p, (k+1)*p - 1), arma::span(0, p - 1))%W;
-		
+
 	}
 
 
@@ -408,8 +397,8 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 			sump_os = -log(sump_os);
 			// SCANG_B
 			sump_ob = CCT_pval(CCT_pb,CCT_weights_b);
-			sump_ob = -log(sump_ob);		
-			
+			sump_ob = -log(sump_ob);
+
 			// Signal_regions
 			// SCANG_O
 			if(sump_o > threshold_o)
@@ -438,7 +427,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 				candidate_b(num - 1, 1) = 1;
 				candidate_b(num - 1, 2) = i;
 			}
-			
+
 			// TOP 1 Region
 			// SCANG_O
 			if(sump_o > summax)
@@ -448,7 +437,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 				candidatemax(0,1) = 1 + begid - 1;
 				candidatemax(0,2) = i + begid - 1;
 			}
-			
+
 			// SCANG_S
 			if(sump_os > summax_s)
 			{
@@ -457,7 +446,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 				candidatemax_s(0,1) = 1 + begid - 1;
 				candidatemax_s(0,2) = i + begid - 1;
 			}
-			
+
 			// SCANG_B
 			if(sump_ob > summax_b)
 			{
@@ -618,8 +607,8 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 				sump_os = -log(sump_os);
 				// SCANG_B
 				sump_ob = CCT_pval(CCT_pb,CCT_weights_b);
-				sump_ob = -log(sump_ob);		
-			
+				sump_ob = -log(sump_ob);
+
 				// Signal_regions
 				// SCANG_O
 				if(sump_o > threshold_o)
@@ -648,7 +637,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 					candidate_b(num_b - 1, 1) = j + 1;
 					candidate_b(num_b - 1, 2) = j + i;
 				}
-			
+
 				// TOP 1 Region
 				// SCANG_O
 				if(sump_o > summax)
@@ -658,7 +647,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 					candidatemax(0,1) = j + 1 + begid - 1;
 					candidatemax(0,2) = j + i + begid - 1;
 				}
-			
+
 				// SCANG_S
 				if(sump_os > summax_s)
 				{
@@ -667,7 +656,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 					candidatemax_s(0,1) = j + 1 + begid - 1;
 					candidatemax_s(0,2) = j + i + begid - 1;
 				}
-			
+
 				// SCANG_B
 				if(sump_ob > summax_b)
 				{
@@ -737,7 +726,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 			res(num1 - 1, 2) = candidate(kk, 2) + begid - 1;
 		}
 	}
-	
+
 	// SCANG_S
 	arma::uvec indices_s = sort_index(-candidate_s.col(0));
 	candidate_s = candidate_s.rows(indices_s);
@@ -793,7 +782,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 			res_s(num1_s - 1, 2) = candidate_s(kk, 2) + begid - 1;
 		}
 	}
-	
+
 	// SCANG_B
 	arma::uvec indices_b = sort_index(-candidate_b.col(0));
 	candidate_b = candidate_b.rows(indices_b);
@@ -849,7 +838,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 			res_b(num1_b - 1, 2) = candidate_b(kk, 2) + begid - 1;
 		}
 	}
-	
+
 	return List::create(Named("res_o") = res, Named("resmost_o") = candidatemax, Named("res_s") = res_s, Named("resmost_s") = candidatemax_s, Named("res_b") = res_b, Named("resmost_b") = candidatemax_b);
 
 
