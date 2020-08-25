@@ -2,7 +2,7 @@ Package: SCANG
 Type: Package
 Title: ScanG (SCAN the Genome) Procedure for Whole Genome Sequencing Study
 Version: 1.0.3
-Date: 2020-08-22
+Date: 2020-08-25
 Author: Zilin Li [aut, cre], XiHao Li [aut, cre], Han Chen [aut]
 Maintainer: Zilin Li <li@hsph.harvard.edu>, Xihao Li <xihaoli@g.harvard.edu>
 Description: R package for performing SCANG procedure in whole genome squencing studies.

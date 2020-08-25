@@ -1,10 +1,6 @@
 exportPattern("^[[:alpha:]]+")
-import(Rcpp, GMMAT, Matrix)
-importFrom("stats", "binomial", "dbeta", "glm", "model.matrix","lm","pcauchy","rnorm")
-importFrom("Rcpp", "evalCpp")
-importFrom("GMMAT", "glmmkin")
-importFrom("Matrix", "Matrix", "colMeans")
-importFrom("stats", "quantile")
+import(Rcpp, GMMAT, Matrix, STAAR)
+importFrom("stats", "binomial", "dbeta", "glm", "model.matrix","lm","pcauchy","rnorm","quantile")
 importFrom("GENESIS", "makeSparseMatrix")
 importFrom("kinship2", "makekinship")
 
