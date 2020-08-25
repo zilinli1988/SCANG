@@ -6,32 +6,6 @@
 
 using namespace Rcpp;
 
-// Bisection
-double Bisection(arma::vec egvalues, double q, double xmin, double xmax);
-RcppExport SEXP _SCANG_Bisection(SEXP egvaluesSEXP, SEXP qSEXP, SEXP xminSEXP, SEXP xmaxSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::vec >::type egvalues(egvaluesSEXP);
-    Rcpp::traits::input_parameter< double >::type q(qSEXP);
-    Rcpp::traits::input_parameter< double >::type xmin(xminSEXP);
-    Rcpp::traits::input_parameter< double >::type xmax(xmaxSEXP);
-    rcpp_result_gen = Rcpp::wrap(Bisection(egvalues, q, xmin, xmax));
-    return rcpp_result_gen;
-END_RCPP
-}
-// CCT_pval
-double CCT_pval(arma::vec x, arma::vec weights);
-RcppExport SEXP _SCANG_CCT_pval(SEXP xSEXP, SEXP weightsSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::vec >::type x(xSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type weights(weightsSEXP);
-    rcpp_result_gen = Rcpp::wrap(CCT_pval(x, weights));
-    return rcpp_result_gen;
-END_RCPP
-}
 // matsp
 List matsp(arma::mat G);
 RcppExport SEXP _SCANG_matsp(SEXP GSEXP) {
@@ -40,54 +14,6 @@ BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat >::type G(GSEXP);
     rcpp_result_gen = Rcpp::wrap(matsp(G));
-    return rcpp_result_gen;
-END_RCPP
-}
-// matrix_flip
-List matrix_flip(arma::mat G);
-RcppExport SEXP _SCANG_matrix_flip(SEXP GSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat >::type G(GSEXP);
-    rcpp_result_gen = Rcpp::wrap(matrix_flip(G));
-    return rcpp_result_gen;
-END_RCPP
-}
-// K
-double K(double x, arma::vec egvalues);
-RcppExport SEXP _SCANG_K(SEXP xSEXP, SEXP egvaluesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type x(xSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type egvalues(egvaluesSEXP);
-    rcpp_result_gen = Rcpp::wrap(K(x, egvalues));
-    return rcpp_result_gen;
-END_RCPP
-}
-// K1
-double K1(double x, arma::vec egvalues, double q);
-RcppExport SEXP _SCANG_K1(SEXP xSEXP, SEXP egvaluesSEXP, SEXP qSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type x(xSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type egvalues(egvaluesSEXP);
-    Rcpp::traits::input_parameter< double >::type q(qSEXP);
-    rcpp_result_gen = Rcpp::wrap(K1(x, egvalues, q));
-    return rcpp_result_gen;
-END_RCPP
-}
-// K2
-double K2(double x, arma::vec egvalues);
-RcppExport SEXP _SCANG_K2(SEXP xSEXP, SEXP egvaluesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type x(xSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type egvalues(egvaluesSEXP);
-    rcpp_result_gen = Rcpp::wrap(K2(x, egvalues));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -244,18 +170,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// Saddle
-double Saddle(double q, arma::vec egvalues);
-RcppExport SEXP _SCANG_Saddle(SEXP qSEXP, SEXP egvaluesSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type q(qSEXP);
-    Rcpp::traits::input_parameter< arma::vec >::type egvalues(egvaluesSEXP);
-    rcpp_result_gen = Rcpp::wrap(Saddle(q, egvalues));
-    return rcpp_result_gen;
-END_RCPP
-}
 // maxO
 arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat weights_B, arma::mat weights_S, arma::mat Cov, double filter, int times);
 RcppExport SEXP _SCANG_maxO(SEXP pSEXP, SEXP LmaxSEXP, SEXP LminSEXP, SEXP steplengthSEXP, SEXP xSEXP, SEXP weights_BSEXP, SEXP weights_SSEXP, SEXP CovSEXP, SEXP filterSEXP, SEXP timesSEXP) {
@@ -301,13 +215,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_SCANG_Bisection", (DL_FUNC) &_SCANG_Bisection, 4},
-    {"_SCANG_CCT_pval", (DL_FUNC) &_SCANG_CCT_pval, 2},
     {"_SCANG_matsp", (DL_FUNC) &_SCANG_matsp, 1},
-    {"_SCANG_matrix_flip", (DL_FUNC) &_SCANG_matrix_flip, 1},
-    {"_SCANG_K", (DL_FUNC) &_SCANG_K, 2},
-    {"_SCANG_K1", (DL_FUNC) &_SCANG_K1, 3},
-    {"_SCANG_K2", (DL_FUNC) &_SCANG_K2, 2},
     {"_SCANG_Liumod", (DL_FUNC) &_SCANG_Liumod, 2},
     {"_SCANG_SCANG_O_Search", (DL_FUNC) &_SCANG_SCANG_O_Search, 17},
     {"_SCANG_SCANG_O_Search_Relatedness", (DL_FUNC) &_SCANG_SCANG_O_Search_Relatedness, 14},
@@ -315,7 +223,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_SCANG_SCANG_O_Thres", (DL_FUNC) &_SCANG_SCANG_O_Thres, 12},
     {"_SCANG_SCANG_O_Thres_Relatedness", (DL_FUNC) &_SCANG_SCANG_O_Thres_Relatedness, 10},
     {"_SCANG_SCANG_O_Thres_Relatedness_sp", (DL_FUNC) &_SCANG_SCANG_O_Thres_Relatedness_sp, 12},
-    {"_SCANG_Saddle", (DL_FUNC) &_SCANG_Saddle, 2},
     {"_SCANG_maxO", (DL_FUNC) &_SCANG_maxO, 10},
     {"_SCANG_regionfilter", (DL_FUNC) &_SCANG_regionfilter, 2},
     {"_SCANG_svd_c", (DL_FUNC) &_SCANG_svd_c, 1},
