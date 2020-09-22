@@ -10,7 +10,7 @@ library(devtools)
 devtools::install_github("zilinli1988/SCANG")
 ```
 ## Usage
-Please see the <a href="doc/SCANG-manual-v1.0.3.pdf">**SCANG** user manual</a> for detailed usage of SCANG package. Please see the <a href="https://htmlpreview.github.io/?https://github.com/zilinli1988/STAAR/blob/master/docs/SCANG_Example_v1.0.3.html">**STAAR** tutorial</a> for an example of analyzing sequencing data using SCANG procedure.
+Please see the <a href="doc/SCANG-manual-v1.0.3.pdf">**SCANG** user manual</a> for detailed usage of SCANG package. Please see the <a href="https://htmlpreview.github.io/?https://github.com/zilinli1988/STAAR/blob/master/doc/SCANG_Example_v1.0.3.html">**STAAR** tutorial</a> for an example of analyzing sequencing data using SCANG procedure.
 ## Citation
 If you use **SCANG** for your work, please cite:
 
