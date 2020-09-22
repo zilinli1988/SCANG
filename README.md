@@ -18,7 +18,7 @@ Zilin Li, Xihao Li, Yaowu Liu, Jincheng Shen, Han Chen, Hufeng Zhou, Alanna C. M
 ## Version
 v1.0.2: Allow incorporating multiple functional annotations in SCANG procedure through <a href="https://github.com/xihaoli/STAAR">STAAR</a>.  
 v1.0.2.1: Add one more parameter in SCANG function.<br>
-v1.0.3: Clean up the C++ functions to avoid duplication with STAAR package.
+v1.0.3: Clean up the C++ functions to avoid duplication with STAAR package.<br>
 v1.0.3.1: Define ARMA_64BIT_WORD 1 in C++ code.
 ## License
 This software is licensed under GPLv3.
