@@ -1,5 +1,6 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
+#define ARMA_64BIT_WORD 1
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
 using namespace Rcpp;
@@ -10,13 +11,13 @@ arma::mat regionfilter(arma::mat candidate, const double f)
 {
 	int ii,jj,kk;
 	int num =  candidate.n_rows;
-	
+
 	arma::uvec indices = sort_index(-candidate.col(0));
 	candidate = candidate.rows(indices);
-	
+
 	double loc_left = 0;
 	double loc_right = 0;
-		
+
 	for (ii = 0; ii < (num-1); ii++)
 	{
 		if (candidate(ii,3) < 1)
@@ -37,20 +38,20 @@ arma::mat regionfilter(arma::mat candidate, const double f)
 				{
 					loc_right = candidate(jj, 2);
 				}
-								
+
 				if (loc_right > loc_left - 1)
 				{
 					if((loc_right-loc_left + 1)/(candidate(jj,2) - candidate(jj,1) + 1) > f)
 					{
 						candidate(jj, 3) = 1;
 					}
-					
-				
+
+
 				}
 			}
 		}
 	}
-	
+
 	int num1 = 0;
 	arma::mat res(1, 4);
 	res.zeros();

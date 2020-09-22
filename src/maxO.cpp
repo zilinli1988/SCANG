@@ -1,5 +1,6 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
+#define ARMA_64BIT_WORD 1
 #include <STAAR.h>
 #include <RcppArmadillo.h>
 #include <Rcpp.h>
@@ -29,7 +30,7 @@ arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat
 	Covw_S.zeros(w_num*p,p);
 
 	arma::mat Covw2_S;
-	Covw2_S.zeros(w_num*p,p);	
+	Covw2_S.zeros(w_num*p,p);
 
 	// Weights Matrix
 	arma::mat W;
@@ -39,10 +40,10 @@ arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat
 	// Burden
 	arma::vec weights_vec_B;
 	weights_vec_B.zeros(p);
-	
+
 	// SKAT
 	arma::vec weights_vec_S;
-	weights_vec_S.zeros(p);	
+	weights_vec_S.zeros(p);
 
 	for(k = 0; k < w_num; k++)
 	{
@@ -58,7 +59,7 @@ arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat
 		Covw_B(arma::span(k*p, (k+1)*p - 1), arma::span(0, p - 1)) = Covw_B(arma::span(k*p, (k+1)*p - 1), arma::span(0, p - 1))%W;
 
 		// Covw2_B(arma::span(k*p, (k+1)*p - 1), arma::span(0, p - 1)) = Covw_B(arma::span(k*p, (k+1)*p - 1), arma::span(0, p - 1))%Covw_B(arma::span(k*p, (k+1)*p - 1), arma::span(0, p - 1));
-		
+
 		// SKAT
 		for(kk = 0; kk < p; kk++)
 		{
@@ -127,7 +128,7 @@ arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat
 	// Intermediate parameter for Omnibus test (0:Omnibus; 1:SKAT; 2:Burden)
 	arma::mat sump_o;
 	sump_o.ones(3,times);
-	
+
 	arma::vec CCT_weights;
 	CCT_weights.ones(2*w_num);
 
@@ -355,7 +356,7 @@ arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat
 				{
 					threshold(0,r) = sump_o(0,r);
 				}
-					
+
 				// SCANG-S
 				sump_o(1,r) = CCT_pval(CCT_p(arma::span(0,w_num - 1)),CCT_weights(arma::span(0,w_num - 1)));
 				sump_o(1,r) = -log(sump_o(1,r));
@@ -364,7 +365,7 @@ arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat
 				{
 					threshold(1,r) = sump_o(1,r);
 				}
-					
+
 				// SCANG-B
 				sump_o(2,r) = CCT_pval(CCT_p(arma::span(w_num,2*w_num - 1)),CCT_weights(arma::span(w_num,2*w_num - 1)));
 				sump_o(2,r) = -log(sump_o(2,r));
@@ -372,7 +373,7 @@ arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat
 				if(sump_o(2,r) > threshold(2,r))
 				{
 					threshold(2,r) = sump_o(2,r);
-				}					
+				}
 			}
 		}
 
@@ -550,7 +551,7 @@ arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat
 					{
 						threshold(0,r) = sump_o(0,r);
 					}
-					
+
 					// SCANG-S
 					sump_o(1,r) = CCT_pval(CCT_p(arma::span(0,w_num - 1)),CCT_weights(arma::span(0,w_num - 1)));
 					sump_o(1,r) = -log(sump_o(1,r));
@@ -559,7 +560,7 @@ arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat
 					{
 						threshold(1,r) = sump_o(1,r);
 					}
-					
+
 					// SCANG-B
 					sump_o(2,r) = CCT_pval(CCT_p(arma::span(w_num,2*w_num - 1)),CCT_weights(arma::span(w_num,2*w_num - 1)));
 					sump_o(2,r) = -log(sump_o(2,r));
@@ -567,7 +568,7 @@ arma::mat maxO(int p, int Lmax, int Lmin, int steplength, arma::mat x, arma::mat
 					if(sump_o(2,r) > threshold(2,r))
 					{
 						threshold(2,r) = sump_o(2,r);
-					}					
+					}
 				}
 			}
 		}

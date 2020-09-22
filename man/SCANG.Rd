@@ -90,7 +90,8 @@ Association Regions in Whole-Genome Sequencing Studies.
 Li, X., Li, Z., et al. (2020). Dynamic incorporation of multiple
 in-silico functional annotations empowers rare variant association analysis of
 large whole genome sequencing studies at scale.
-\emph{Nature Genetics (in press)}.
+\emph{Nature Genetics}.
+(\href{https://www.nature.com/articles/s41588-020-0676-4}{pub})
 
 Liu, Y., et al. (2019). Acat: A fast and powerful p value combination
 method for rare-variant analysis in sequencing studies.

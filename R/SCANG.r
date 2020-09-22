@@ -58,7 +58,8 @@
 #' @references Li, X., Li, Z., et al. (2020). Dynamic incorporation of multiple
 #' in-silico functional annotations empowers rare variant association analysis of
 #' large whole genome sequencing studies at scale.
-#' \emph{Nature Genetics (in press)}.
+#' \emph{Nature Genetics}.
+#' (\href{https://www.nature.com/articles/s41588-020-0676-4}{pub})
 #' @references Liu, Y., et al. (2019). Acat: A fast and powerful p value combination
 #' method for rare-variant analysis in sequencing studies.
 #' \emph{The American Journal of Human Genetics 104}(3), 410-421.
@@ -204,7 +205,7 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 
 				##### SCANG-O(-S;-B)
 				restemp <- SCANG_O_Search_Relatedness(genotypesub,obj_nullmodel$P,residuals.phenotype,th0_O,th0_S,th0_B,Lmax,Lmin,steplength,weightssub_B,weightssub_S,begid,filter,f)
-				
+
 				##### SCANG-O
 				res_O <- rbind(res_O,restemp$res_o)
 				resmost_O <- rbind(resmost_O,restemp$resmost_o)
@@ -261,7 +262,7 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 
 				##### SCANG-O(-S;-B)
 				restemp <- SCANG_O_Search_Relatedness_sp(genotypesub,Sigma_i,Sigma_iX,cov,residuals.phenotype,th0_O,th0_S,th0_B,Lmax,Lmin,steplength,weightssub_B,weightssub_S,begid,filter,f)
-				
+
 				##### SCANG-O
 				res_O <- rbind(res_O,restemp$res_o)
 				resmost_O <- rbind(resmost_O,restemp$resmost_o)
@@ -328,7 +329,7 @@ SCANG <- function(genotype,obj_nullmodel,Lmin,Lmax,annotation_phred=NULL,rare_ma
 
 			##### SCANG-O(-S;-B)
 			restemp <- SCANG_O_Search(genotypesub,X,working,sigma,fam,residuals.phenotype,th0_O,th0_S,th0_B,Lmax,Lmin,steplength,weightssub_B,weightssub_S,begid,filter,f)
-			
+
 			##### SCANG-O
 			res_O <- rbind(res_O,restemp$res_o)
 			resmost_O <- rbind(resmost_O,restemp$resmost_o)
