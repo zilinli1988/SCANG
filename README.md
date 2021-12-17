@@ -11,6 +11,8 @@ devtools::install_github("zilinli1988/SCANG")
 ```
 ## Usage
 Please see the <a href="doc/SCANG-manual-v1.0.3.pdf">**SCANG** user manual</a> for detailed usage of SCANG package. Please see the <a href="https://htmlpreview.github.io/?https://github.com/zilinli1988/SCANG/blob/master/doc/SCANG_Example_v1.0.3.html">**SCANG** tutorial</a> for an example of analyzing sequencing data using SCANG procedure.
+
+For optimal computational performance, it is recommended to use an R version configured with the Intel Math Kernel Library (or other fast BLAS/LAPACK libraries). See the <a href="https://software.intel.com/en-us/articles/using-intel-mkl-with-r">instructions</a> on building R with Intel MKL.
 ## Citation
 If you use **SCANG** for your work, please cite:
 
