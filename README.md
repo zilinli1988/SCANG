@@ -3,7 +3,7 @@ This is an R package for performing SCANG procedure in whole genome sequencing s
 ## Description
 SCANG is an R package for performing a flexible and computationally efficient scan statistic procedure (SCANG) that uses the p-value of a variant set-based test as a scan statistic of each moving window, to detect rare variant association regions for both continuous and dichotomous traits.
 ## Dependencies
-SCANG links to R packages <a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a> and <a href="https://cran.r-project.org/web/packages/RcppArmadillo/index.html">RcppArmadillo</a>, and also imports R packages <a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a>, <a href="https://cran.r-project.org/web/packages/GMMAT/index.html">GMMAT</a>, <a href="https://bioconductor.org/packages/release/bioc/html/GENESIS.html">GENESIS</a>, <a href="https://github.com/xihaoli/STAAR">STAAR</a>, <a href="https://cran.r-project.org/web/packages/Matrix/index.html">Matrix</a>, <a href="https://cran.r-project.org/web/packages/kinship2/index.html">kinship2</a>. These dependencies should be installed before installing SCANG.
+SCANG links to R packages <a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a> and <a href="https://cran.r-project.org/web/packages/RcppArmadillo/index.html">RcppArmadillo</a>, and also imports R packages <a href="https://cran.r-project.org/web/packages/Rcpp/index.html">Rcpp</a>, <a href="https://cran.r-project.org/web/packages/GMMAT/index.html">GMMAT</a>, <a href="https://cran.r-project.org/web/packages/Matrix/index.html">Matrix</a>, <a href="https://bioconductor.org/packages/release/bioc/html/GENESIS.html">GENESIS</a>, <a href="https://github.com/xihaoli/STAAR">STAAR</a>, <a href="https://cran.r-project.org/web/packages/kinship2/index.html">kinship2</a>. These dependencies should be installed before installing SCANG.
 ## Installation
 ```
 library(devtools)
@@ -12,7 +12,7 @@ devtools::install_github("zilinli1988/SCANG")
 ## Docker Image
 A [docker image for SCANG](https://hub.docker.com/repository/docker/zilinli/staarpipeline), including R (version 3.6.1) built with Intel MKL and all STAAR-related packages (STAAR, SCANG, STAARpipeline, STAARpipelineSummary) pre-installed, is located in the Docker Hub. The docker image can be pulled using
 ```
-docker pull zilinli/staarpipeline
+docker pull zilinli/staarpipeline:0.9.6
 ```
 ## Usage
 Please see the <a href="doc/SCANG-manual-v1.0.3.pdf">**SCANG** user manual</a> for detailed usage of SCANG package. Please see the <a href="https://htmlpreview.github.io/?https://github.com/zilinli1988/SCANG/blob/master/doc/SCANG_Example_v1.0.3.html">**SCANG** tutorial</a> for an example of analyzing sequencing data using SCANG procedure.
