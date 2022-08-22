@@ -15,7 +15,7 @@ A [docker image for SCANG](https://hub.docker.com/repository/docker/zilinli/staa
 docker pull zilinli/staarpipeline:0.9.6
 ```
 ## Usage
-Please see the <a href="doc/SCANG-manual-v1.0.3.pdf">**SCANG** user manual</a> for detailed usage of SCANG package. Please see the <a href="https://htmlpreview.github.io/?https://github.com/zilinli1988/SCANG/blob/master/doc/SCANG_Example_v1.0.3.html">**SCANG** tutorial</a> for an example of analyzing sequencing data using SCANG procedure.
+Please see the <a href="doc/SCANG-manual-v1.0.4.pdf">**SCANG** user manual</a> for detailed usage of SCANG package. Please see the <a href="https://htmlpreview.github.io/?https://github.com/zilinli1988/SCANG/blob/master/doc/SCANG_Example_v1.0.4.html">**SCANG** tutorial</a> for an example of analyzing sequencing data using SCANG procedure.
 
 For optimal computational performance, it is recommended to use an R version configured with the Intel Math Kernel Library (or other fast BLAS/LAPACK libraries). See the <a href="https://software.intel.com/en-us/articles/using-intel-mkl-with-r">instructions</a> on building R with Intel MKL.
 ## Citation
