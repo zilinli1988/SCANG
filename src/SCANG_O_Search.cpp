@@ -424,7 +424,7 @@ List SCANG_O_Search(arma::sp_mat G, arma::mat X, arma::vec working, double sigma
 			{
 				num_b = num_b + 1;
 				candidate_b.resize(num, 4);
-				candidate_b(num - 1, 0) = sump_os;
+				candidate_b(num - 1, 0) = sump_ob;
 				candidate_b(num - 1, 1) = 1;
 				candidate_b(num - 1, 2) = i;
 			}

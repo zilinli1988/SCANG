@@ -409,7 +409,7 @@ List SCANG_O_Search_Relatedness(arma::sp_mat G, arma::mat P, arma::vec residuals
 			{
 				num_b = num_b + 1;
 				candidate_b.resize(num, 4);
-				candidate_b(num - 1, 0) = sump_os;
+				candidate_b(num - 1, 0) = sump_ob;
 				candidate_b(num - 1, 1) = 1;
 				candidate_b(num - 1, 2) = i;
 			}

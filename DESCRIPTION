@@ -2,9 +2,9 @@ Package: SCANG
 Type: Package
 Title: SCANG (SCAN the Genome) Procedure for Whole-Genome Sequencing Studies
 Version: 1.0.4
-Date: 2022-08-21
+Date: 2024-07-22
 Author: Zilin Li [aut, cre], Xihao Li [aut, cre], Han Chen [aut]
-Maintainer: Zilin Li <li@hsph.harvard.edu>, Xihao Li <xihaoli@g.harvard.edu>
+Maintainer: Zilin Li <lizl@nenu.edu.cn>, Xihao Li <xihaoli@unc.edu>
 Description: R package for performing SCANG procedure in whole-genome squencing studies.
 License: GPL-3
 Copyright: See COPYRIGHTS for details.
