@@ -27,6 +27,7 @@ v1.0.2: Allow incorporating multiple functional annotations in SCANG procedure t
 v1.0.2.1: Add one more parameter in SCANG function.<br>
 v1.0.3: Clean up the C++ functions to avoid duplication with STAAR package.<br>
 v1.0.3.1: Define ARMA_64BIT_WORD 1 in C++ code.<br>
-v1.0.4.1: Fix a typo in the summarization of SCANG-B results, not affect the results summarized by STAARpipelineSummary (Thanks for Zhiwen Owen Jiang (https://www.github.com/Zhiwen-Owen-Jiang) for pointing out this issue).
+v1.0.4: Adjust for the updated class of matrix ("matrix" and "array") after R version 4.0.0.<br>
+v1.0.4.1: Fix a typo in the summarization of SCANG-B results, not affect the results summarized by STAARpipelineSummary (Thanks for [@Zhiwen-Owen-Jiang](https://www.github.com/Zhiwen-Owen-Jiang) for pointing out this issue).
 ## License
 This software is licensed under GPLv3.
